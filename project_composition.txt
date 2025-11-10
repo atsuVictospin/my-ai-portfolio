@@ -1,0 +1,27 @@
+my-ai-portfolio/
+├── README.md                  # プロジェクト概要・実行方法・結果説明
+├── environment.yml            # conda環境構築用ファイル
+├── requirements.txt           # Python依存ライブラリ一覧
+├── src/                      # コード本体
+│   ├── data_preprocessing.py  # 画像前処理、データ拡張の関数群
+│   ├── dataset.py             # データセットクラス定義（フォルダ読み込み・ラベル付与）
+│   ├── model.py               # CNNモデル定義（例：ResNetベース）
+│   ├── train.py               # 学習ループの実装
+│   ├── evaluate.py            # 評価処理（精度算出・混同行列表示）
+│   └── inference.py           # 推論処理（単体画像クラス推定）
+├── data/
+│   ├── raw/                   # 元画像データ（クラス別フォルダ構成）
+│   ├── processed/             # 前処理済み画像データ
+│   └── labels.csv             # ファイル名・ラベル対応CSV
+├── notebooks/
+│   └── analysis.ipynb         # 実験レポートや可視化用ノートブック
+├── results/
+│   ├── confusion_matrix.png   # 混同行列画像サンプル
+│   └── metrics_report.md      # 詳細評価レポート
+|── docs/
+|  └── project_details.md     # 追加説明資料や補足情報
+|
+|----- study/
+|  |------study_notebooks        # 自主学習用フォルダ
+|
+|── project_composition.txt   # プロジェクトの構成図
