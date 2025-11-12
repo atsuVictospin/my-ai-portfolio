@@ -24,8 +24,14 @@ pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu12
 
 ## 環境構築
 ```
+1.Anaconda Prompt またはターミナル以下を入力
 conda env create -f environment.yml
+または手動で
+pip install -r requirements.txt
+
+2.Jupyter Notebook 開始（ymlファイルを読み込むと環境名が ai-portfolio になる）
 conda activate "仮想環境名"
+jupyter notebook
 ```
 
 ## 実行方法
