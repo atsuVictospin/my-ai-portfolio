@@ -1,5 +1,6 @@
 # 評価処理（精度算出・混同行列表示）
 # 学習済みモデルを読み込み、テストデータで評価し、正答率や混合行列で性能を評価する
+# 「どれくらい正確に分類できたか」を確認するためのコードです。
 
 import torch
 from torchvision import datasets, transforms

@@ -8,7 +8,8 @@ my-ai-portfolio/
 │   ├── model.py               # CNNモデル定義（例：ResNetベース）
 │   ├── train.py               # 学習ループの実装
 │   ├── evaluate.py            # 評価処理（精度算出・混同行列表示）
-│   └── inference.py           # 推論処理（単体画像クラス推定）
+│   ├── inference.py           # 推論処理（単体画像クラス推定）
+│   └── quick_demo.py          # 簡略化した入門版
 ├── data/
 │   ├── raw/                   # 元画像データ（クラス別フォルダ構成）
 │   ├── processed/             # 前処理済み画像データ

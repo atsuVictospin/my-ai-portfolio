@@ -1,6 +1,27 @@
 # dataset_selector_demo.py
 # 目的：MVTec AD（製造部品の良品・不良品分類）とStanford Cars（車種分類）を
 #       同じAIモデル構造で切り替えて学習できるテンプレート
+"""
+dataset_type = "mvtec" → 製造部品の良不良分類
+dataset_type = "cars" → 車種分類
+
+それぞれのフォルダ構造は以下のように配置。
+data/raw/mvtec_ad/train/
+    ├── good/
+    └── defect/
+data/raw/mvtec_ad/test/
+    ├── good/
+    └── defect/
+data/raw/stanford_cars/train/
+    ├── Acura_NSX/
+    ├── BMW_3_Series/
+    └── ...
+data/raw/stanford_cars/test/
+    ├── Acura_NSX/
+    ├── BMW_3_Series/
+    └── ...
+
+"""
 
 import torch
 import torch.nn as nn
