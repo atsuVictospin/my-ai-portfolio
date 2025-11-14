@@ -18,8 +18,8 @@ pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu12
 - 使用データ：MVTec AD公開製造業画像データセット  
 - クラス数：良品、不良品の計2クラス  
 - データ構成：次のフォルダごとに画像を配置
-            `data/raw/train/`, `data/raw/val/`  
-- ラベル管理：`data/labels.csv`に、ファイル名とラベルの対応を保存
+            `dataset/raw/train/`, `dataset/raw/val/`  
+- ラベル管理：`dataset/labels.csv`に、ファイル名とラベルの対応を保存
 
 
 ## 環境構築

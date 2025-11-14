@@ -22,7 +22,8 @@ my-ai-portfolio/
 |── docs/
 |  └── project_details.md     # 追加説明資料や補足情報
 |
-|----- study/
-|  |------study_notebooks        # 自主学習用フォルダ
+|── study/
+|  └──study_notebooks        # 自主学習用フォルダ
 |
-|── project_composition.txt   # プロジェクトの構成図
+└──project_composition.txt   # プロジェクトの構成図
+

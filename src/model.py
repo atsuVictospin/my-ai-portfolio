@@ -9,16 +9,16 @@ from torchvision.models import resnet18, ResNet18_Weights
 # シンプルな自作CNNモデルを定義
 class SimpleCNN(nn.Module):
     def __init__(self, num_classes):
-        # nn.Moduleクラスの継承を初期化
-        super(SimpleCNN, self).__init__()
-        # 1層目：入力画像(3ch)、出力16chの畳み込み層。カーネルサイズ3x3
-        self.conv1 = nn.Conv2d(3, 16, 3, padding=1)
+        super(SimpleCNN, self).__init__()                     # nn.Moduleクラスの継承を初期化
+        self.conv1 = nn.Conv2d(3, 16, 3, padding=1)           # 1層目：入力画像(3ch)、出力16chの畳み込み層。カーネルサイズ3x3
+        self.relu1 = nn.ReLU()                                # 活性化関数（ReLU）
+        self.pool1 = nn.MaxPool2d(2, 2)                       # MaxPooling層（2x2でダウンサンプリング＝画像を1/2サイズに）
         # 2層目：入力16ch、出力32ch
         self.conv2 = nn.Conv2d(16, 32, 3, padding=1)
-        # MaxPooling層（2x2でダウンサンプリング＝画像を1/2サイズに）
+        self.relu1 = nn.ReLU()                                # 活性化関数（ReLU）
         self.pool = nn.MaxPool2d(2, 2)
         # 全結合層（特徴をクラスに変換）
-        self.fc1 = nn.Linear(32 * 8 * 8, 128)  # 入力次元は画像サイズ次第で調整必要
+        self.fc1 = nn.Linear(32 * 32 * 32, 128)  # 入力次元は画像サイズ次第で調整必要
         self.fc2 = nn.Linear(128, num_classes)
 
     def forward(self, x):
@@ -26,7 +26,7 @@ class SimpleCNN(nn.Module):
         x = self.pool(F.relu(self.conv1(x)))
         x = self.pool(F.relu(self.conv2(x)))
         # 特徴マップを平坦化
-        x = x.view(-1, 32 * 8 * 8)
+        x = x.view(-1, 32 * 32 * 32)
         # 全結合層を通して分類
         x = F.relu(self.fc1(x))
         x = self.fc2(x)

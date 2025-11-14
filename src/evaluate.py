@@ -16,11 +16,11 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # 評価するデータセットの種類を設定
 datasets_type = "mvtec"   # "cars"にするとstanford_carsを使用可能
-test_path = f"../datasets/raw/{datasets_type}_ad/val" if datasets_type == "mvtec" else f"datasets/raw/stanford_cars/test"
+test_path = fr"C:\work\mazda_ai_portfolio\datasets\{datasets_type}_ad\processed\metal_nut\metal_nut\val" if datasets_type == "mvtec" else f"datasets/raw/stanford_cars/test"
 
 # データの前処理（画像サイズを64x64に統一）
 transform = transforms.Compose([
-    transforms.Resize((64, 64)),
+    transforms.Resize((128, 128)),
     transforms.ToTensor(),
 ])
 
@@ -34,15 +34,15 @@ model_type = "resnet"
 
 if model_type == "Simple":
     model = SimpleCNN(num_classes=len(class_names))
-    model.load_state_dict(torch.load(f"../results/{datasets_type}_simplecnn.pth", map_location=device))
+    model.load_state_dict(torch.load(fr"C:\work\mazda_ai_portfolio\results\{datasets_type}_simplecnn.pth", map_location=device))
 else:
     model = build_resnet_model(num_classes=len(class_names))
-    model.load_state_dict(torch.load(f"../results/{datasets_type}_resnet18.pth", map_location=device))
+    model.load_state_dict(torch.load(fr"C:\work\mazda_ai_portfolio\results\{datasets_type}_resnet18.pth", map_location=device))
 
 model.to(device)
 model.eval()
 
-# 評価処理
+# 評価処関数
 all_preds, all_labels = [], []
 with torch.no_grad():     # 推論時は勾配計算を省略化して高速化
     for images, labels in test_loader:
@@ -65,7 +65,7 @@ sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=class_names, ytic
 plt.xlabel("予測クラス")
 plt.ylabel("正解クラス")
 plt.title(f"Confusion Matrix ({datasets_type.upper()} - {model_type})")
-plt.savefig(f"../results/confusion_matrix_{datasets_type}_{model_type}.png")
+plt.savefig(fr"C:\work\mazda_ai_portfolio\results\confusion_matrix_{datasets_type}_{model_type}.png")
 plt.show
 
 print("混合行列を resultsフォルダに保存しました！")

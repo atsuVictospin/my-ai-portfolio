@@ -41,8 +41,8 @@ dataset_type = "mvtec"  # ← "cars" に変えると車種分類になる
 # ② データパスを自動で切り替え
 # ------------------------------
 if dataset_type == "mvtec":
-    train_path = R"..\datasets\mvtec_ad\processed\metal_nut\metal_nut\train"
-    test_path = R"..\datasets\mvtec_ad\processed\metal_nut\metal_nut\val"
+    train_path = R"datasets\mvtec_ad\processed\metal_nut\metal_nut\train"
+    test_path = R"datasets\mvtec_ad\processed\metal_nut\metal_nut\val"
     num_classes = 2  # 良品 or 不良品
     print("MVTec AD データセットを使用します。")
 else:
@@ -83,9 +83,9 @@ class SimpleCNN(nn.Module):
         )
         self.fc = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(32 * 32 * 32, 64),
+            nn.Linear(32 * 32 * 32, 128),
             nn.ReLU(),
-            nn.Linear(64, num_classes)
+            nn.Linear(128, num_classes)
         )
 
     def forward(self, x):
@@ -154,6 +154,6 @@ evaluate(resnet_model, test_loader, "ResNet18")
 # ------------------------------
 # ⑨ 結果保存
 # ------------------------------
-torch.save(simple_model.state_dict(), f"../results/{dataset_type}_simplecnn.pth")
-torch.save(resnet_model.state_dict(), f"../results/{dataset_type}_resnet18.pth")
+torch.save(simple_model.state_dict(), f"results/{dataset_type}_simplecnn.pth")
+torch.save(resnet_model.state_dict(), f"results/{dataset_type}_resnet18.pth")
 print("モデル保存完了。お疲れさまでした！")

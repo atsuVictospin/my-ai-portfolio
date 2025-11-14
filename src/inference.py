@@ -24,32 +24,46 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # modelをロード
 if model_type == "simple":
     model = SimpleCNN(num_classes=len(class_names))
-    model.load_state_dict(torch.load(f"../results/{dataset_type}_simplecnn.pth", map_location=device))
+    model.load_state_dict(torch.load(f"C:/work/mazda_ai_portfolio/results/{dataset_type}_simplecnn.pth", map_location=device))
 else:
     model = build_resnet_model(num_classes=len(class_names))
-    model.load_state_dict(torch.load(f"../results/{dataset_type}_resnet18.pth", map_location=device))
+    model.load_state_dict(torch.load(f"C:/work/mazda_ai_portfolio/results/{dataset_type}_resnet18.pth", map_location=device))
 
 model.to(device)
 model.eval()
 
 # 推論対象の画像ファイルを指定
-image_path = "../datasets/sample/test_img.jpg"  # 推論したい画像を置く場所
+image_path = R"C:\work\mazda_ai_portfolio\datasets\mvtec_ad\processed\metal_nut\metal_nut\val\negative\067.png"  # 推論したい画像を置く場所
 img = Image.open(image_path).convert("RGB")
 
 # 画像前処理（モデルに合うサイズに整形）
 transform = transforms.Compose([
     transforms.Resize((64, 64)),
-    transforms.Totensor(),
+    transforms.ToTensor(),
 ])
 input_img = transform(img).unsqueeze(0).to(device)  # 1枚だけでもバッチ対応できるように整形
 
 # modelに入力して結果を取得
+# ---------- 推論 + 未知判定 ----------
+with torch.no_grad():
+    output = model(input_img)
+    probs = torch.softmax(output, dim=1)
+    max_prob, pred_idx = torch.max(probs, 1)
+    if max_prob.item() < 0.9:
+        pred_class = "Unknown"
+    else:
+        pred_class = class_names[pred_idx.item()]
+
+print(f"推論結果: {pred_class} (確率: {max_prob.item():.2f})")
+"""
+未知画像もgoodと推論してしまう
 with torch.no_grad():
     output = model(input_img)
     pred_idx = torch.argmax(output, 1).item()
     pred_class = class_names[pred_idx]
 
 print(f"推論結果: {pred_class}")
+"""
 
 # 結果を画像付きで可視化
 import matplotlib.pyplot as plt

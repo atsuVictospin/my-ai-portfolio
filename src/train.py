@@ -2,11 +2,11 @@
 # dataset.pyとmodel.pyを呼ぼだし、学習設定から実行までを担う。
 import torch
 from torch import nn, optim
-from tochvision import datasets, transforms
+from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from model import SimpleCNN,build_resnet_model
 
-# トレーニング処理関数
+# 学習関数
 def tarin_model(model, train_loader, criterion, optimizer, epochs):
     for epoch in range(epochs):
         running_loss = 0.0
